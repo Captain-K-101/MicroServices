@@ -1,4 +1,4 @@
-# python-flask-docker
+# Python Flask Nginx Reverse Proxy Setup
 Basic Python Flask app in Docker which prints the hostname and IP of the container
 
 ### Build application
