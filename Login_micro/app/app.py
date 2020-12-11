@@ -28,11 +28,12 @@ def api_login():
     json_data = request.form
     username=json_data['username']
     passowrd = json_data['password']
-    filtr={'username':username,'password':passowrd}
+    filtr = {'username':username,'password':passowrd}
     online_users = mongo.db.players.find(filtr)
     l=[doc for doc in online_users]
     if not l:
         return json.dumps({'Data':'None'})
+    resp.set_cookie('userName', l[0]['username'])
     return json.dumps(l,default=str)
 
 @app.route('/api/register',methods=['POST'])

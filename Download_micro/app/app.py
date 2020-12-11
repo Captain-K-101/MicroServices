@@ -28,7 +28,8 @@ def download_ytd():
     stream = yt.streams.first()
     filename = yt.streams[0].title+'.mp4'
     stream.download('./uploads/')
-    return 'File Has been Downloaded' 
+    print(filename)
+    return send_file('/app/uploads/'+filename,as_attachment=True) 
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
