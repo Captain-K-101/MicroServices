@@ -18,7 +18,7 @@ def hello_world():
 
 @app.route('/download/youtube',methods=['POST'])
 def download_ytd():
-    json_data = request.json
+    json_data = request.form
     url=json_data['url']
     link='https://www.youtube.com/watch?v='+url
     try:

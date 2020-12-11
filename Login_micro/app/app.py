@@ -7,9 +7,8 @@ import string
 
 app= Flask(__name__)
 
-app.config["MONGO_URI"] = "mongodb+srv://root:toor@cloudproj.xgny0.mongodb.net/<dbname>?retryWrites=true&w=majority"
+app.config["MONGO_URI"] = "mongodb+srv://root:toor@cloudproj.xgny0.mongodb.net/ctf?retryWrites=true&w=majority"
 mongo = PyMongo(app)
-
 
 
 @app.route('/')
@@ -26,7 +25,7 @@ def rest():
 
 @app.route('/api/login',methods=['POST'])
 def api_login():
-    json_data = request.json
+    json_data = request.form
     username=json_data['username']
     passowrd = json_data['password']
     filtr={'username':username,'password':passowrd}
@@ -38,7 +37,7 @@ def api_login():
 
 @app.route('/api/register',methods=['POST'])
 def api_register():
-    json_data = request.json
+    json_data = request.form
     username = json_data['username']
     passowrd = json_data['password']
     email=json_data['email']
