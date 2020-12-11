@@ -1,0 +1,24 @@
+version: '3'
+services:
+  app1:
+    restart: always
+    build: ./Download_micro/
+    expose:
+      - "5000"
+    environment:
+      APP_NAME: "application 1"
+  app2:
+    restart: always
+    build: ./Login_micro/
+    expose:
+      - "5000"
+    environment:
+      APP_NAME: "application 2"
+  nginx:
+    restart: always
+    build: ./nginx/.
+    ports:
+      - 80:80
+    links:
+      - app1:app1
+      - app2:app2
