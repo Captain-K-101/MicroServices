@@ -30,7 +30,7 @@ def api_rest(variable):
     online_users = mongo.db.Restaurant.find(filtr)
     l=[doc for doc in online_users]
     if not l:
-        return json.dumps({'Data':'None'})
+        return json.dumps({'name':'found','Rating':''})
     return json.dumps(l,default=str)
 
 if __name__ == "__main__":

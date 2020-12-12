@@ -23,7 +23,7 @@ services:
       APP_NAME: "application 3"
   nginx:
     restart: always
-    image: captainkay101/cloudnginx:app1
+    image: captainkay101/cloudnginx:nginx
     ports:
       - 8000:80
     links:
