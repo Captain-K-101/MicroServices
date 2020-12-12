@@ -1,4 +1,4 @@
-from flask import Flask,request,send_file
+from flask import Flask,request,send_file,make_response
 from flask_pymongo import PyMongo
 from flask import jsonify
 import json
@@ -33,8 +33,10 @@ def api_login():
     l=[doc for doc in online_users]
     if not l:
         return json.dumps({'Data':'None'})
-    resp.set_cookie('userName', l[0]['username'])
-    return json.dumps(l,default=str)
+    res = make_response("Setting a cookie")
+    print(l)
+    res.set_cookie('userName', str(l[0]['_id']),max_age=60*60*24*365*2)
+    return res
 
 @app.route('/api/register',methods=['POST'])
 def api_register():

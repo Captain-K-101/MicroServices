@@ -4,20 +4,25 @@ import json
 from pytube import YouTube
 import random
 from flask_pymongo import PyMongo
+import os
 
 app= Flask(__name__)
 
-app.config["MONGO_URI"] = "mongodb+srv://root:toor@cloudproj.xgny0.mongodb.net/<dbname>?retryWrites=true&w=majority"
+app.config["MONGO_URI"] = "mongodb+srv://root:toor@cloudproj.xgny0.mongodb.net/ctf?retryWrites=true&w=majority"
 mongo = PyMongo(app)
 
 
 
 @app.route('/')
 def hello_world():
+    if not request.cookies.get('userName'):
+        return 'Login First'
     return 'API EnDPOINT FOR DOWNLOADS'
 
 @app.route('/download/youtube',methods=['POST'])
 def download_ytd():
+    if not request.cookies.get('userName'):
+        return 'Login First'
     json_data = request.form
     url=json_data['url']
     link='https://www.youtube.com/watch?v='+url
