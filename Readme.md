@@ -33,3 +33,33 @@ Add your Project to a folder with its dockerfile
 
 
 ```
+### How to Run as A Kuberneties Microservice
+
+git clone the repo of choice into the server
+install the tool `kompose`(used to change docker-compose.yaml files to kuberneties yaml files)
+run the command kompose convert -f docekr-compose.yml -o <ANYFILENAME>.yaml
+a <ANYFILENAME>.yaml should be created 
+use a text editor and add the following line above the `-port:` option of the microservice you want to expose : `type: LoadBalancer`
+ie: if i want to expose my nginx service
+```            
+    name: nginx
+  spec:
+    ports:
+    - name: "8000"
+      port: 8000
+      targetPort: 80
+```
+changed to 
+```
+    name: nginx
+  spec:
+    type: LoadBalancer
+    ports:
+    - name: "8000"
+      port: 8000
+      targetPort: 80
+```
+save the changes
+run kubectl apply -f <file_name>.yaml
+if everything is successful the pods will get created
+check using command `kubectl get po` and find the exposed ip via `kubectl get svc`            
